@@ -1,3 +1,138 @@
+var formula = `{
+    "conversions": [
+        {
+            "from": "Celsius",
+            "to": "Kelvin",
+            "formula": "K = C + 273.15"
+        },
+        {
+            "from": "Celsius",
+            "to": "Fahrenheit",
+            "formula": "F = (9/5)C + 32"
+        },
+        {
+            "from": "Celsius",
+            "to": "Rankine",
+            "formula": "R = (9/5)C + 491.67"
+            
+        },
+        {
+            "from": "Celsius",
+            "to": "Celsius",
+            "formula": "C = C"
+            
+        },
+        {
+            "from": "Kelvin",
+            "to": "Celsius",
+            "formula": "C = K - 273.15"
+        },
+        {
+            "from": "Kelvin",
+            "to": "Fahrenheit",
+            "formula": "F = (9/5)K - 459.67"
+        },
+        {
+            "from": "Kelvin",
+            "to": "Rankine",
+            "formula": "R = K * 1.8"
+        }, 
+        {
+            "from": "Kelvin",
+            "to": "Kelvin",
+            "formula": "K = K"
+        },
+        {
+            "from": "Fahrenheit",
+            "to": "Celsius",
+            "formula": "C = (F - 32) * 5/9"
+        },
+        {
+            "from": "Fahrenheit",
+            "to": "Kelvin",
+            "formula": "K = (F + 459.67) * 5/9"
+        },
+        {
+            "from": "Fahrenheit",
+            "to": "Rankine",
+            "formula": "R = F + 459.67"
+        },
+        {
+            "from": "Fahrenheit",
+            "to": "Fahrenheit",
+            "formula": "F = F"
+        },
+        {
+            "from": "Rankine",
+            "to": "Celsius",
+            "formula": "C = (R - 491.67) * 5/9"
+        },
+        {
+            "from": "Rankine",
+            "to": "Kelvin",
+            "formula": "K = R * 5/9"
+        },
+        {
+            "from": "Rankine",
+            "to": "Fahrenheit",
+            "formula": "F = R - 459.67"
+        },
+        {
+            "from": "Rankine",
+            "to": "Rankine",
+            "formula": "R = R"
+        }
+    ]
+}`;
+
+
+function _cmnRemoveAllErrorMessage()
+{
+    var allErrorBorder = document.getElementsByClassName('tool-error-border');
+	var allErrorMessage = document.getElementsByClassName('tool-error-message');
+	var i;
+    // remove border
+    for(i = (allErrorBorder.length) - 1; i>=0; i--)
+    {
+        allErrorBorder[i].classList.remove("tool-error-border");
+    }
+    // remove error message
+    for(i = (allErrorMessage.length) - 1; i>=0; i--)
+    {
+        allErrorMessage[i].remove();
+    }	  
+}
+
+function _cmnShowErrorMessageBottomOfTheInputField(fieldID,errorMessage)
+{
+    var inputField = document.getElementById(fieldID);   
+    inputField.classList.add("tool-error-border"); // add border
+    inputField.focus(); // focus error feild
+    
+    var errorMessageElement = document.createElement("p"); // create a p tag for error message
+    errorMessageElement.innerHTML = errorMessage; // set the error message in the p tag
+    errorMessageElement.classList.add("tool-error-message"); // add the error message stye clsss
+    inputField.parentNode.insertBefore(errorMessageElement, inputField.nextSibling); // set the error message uder the error feild
+}
+
+function _cmnHideElement(elementId)
+{
+    var displayProperty = document.getElementById(elementId).style.display;
+    if(displayProperty != 'none')
+    {
+        document.getElementById(elementId).style.display = "none";
+    }
+}
+
+function _cmnShowElement(elementId, givenDisplayProperty)
+{
+    var displayProperty = document.getElementById(elementId).style.display;
+    if(displayProperty != givenDisplayProperty)
+    {
+        document.getElementById(elementId).style.display = givenDisplayProperty;
+    }
+}
+
 function ValidateTemperatureCalculatorForm()
 {
     _cmnRemoveAllErrorMessage();
